@@ -1,4 +1,5 @@
-import type { Metadata } from "next";
+"use client";
+
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
@@ -11,11 +12,6 @@ const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
 });
-
-export const metadata: Metadata = {
-  title: "Vital Workflow - Workflow Architekten",
-  description: "Wir verwandeln chaotische Prozesse in präzise Automatisierung. Workflow-Automatisierung für Schweizer Unternehmen.",
-};
 
 export default function RootLayout({
   children,
