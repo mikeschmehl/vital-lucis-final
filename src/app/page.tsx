@@ -126,9 +126,9 @@ export default function Home() {
             </p>
           </div>
           <div className="flex gap-12 text-sm opacity-60">
-            <a href="#" className="hover:text-white transition-colors">Impressum</a>
-            <a href="#" className="hover:text-white transition-colors">Datenschutz</a>
-            <a href="https://www.linkedin.com" className="hover:text-white transition-colors">LinkedIn</a>
+            <a href="javascript:void(0)" className="hover:text-white transition-colors">Impressum</a>
+            <a href="javascript:void(0)" className="hover:text-white transition-colors">Datenschutz</a>
+            <a href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">LinkedIn</a>
           </div>
         </div>
       </footer>
