@@ -8,7 +8,8 @@ import {
   ArrowUpRight, 
   Users, 
   CheckCircle2,
-  MoveRight
+  MoveRight,
+  Play
 } from 'lucide-react';
 
 export default function Home() {
@@ -55,66 +56,73 @@ export default function Home() {
             </div>
           </div>
 
-          {/* 2. Main Headline */}
+          {/* 2. Main Headline (Lucis Style) */}
           <h1 className="text-[13vw] md:text-[8.5rem] leading-[0.85] tracking-[-0.03em] mb-16 text-[#1a1a1a] font-light">
             Gesunde <br />
             <span className="font-serif italic text-black/90">Mitarbeitende.</span> <br />
             <span className="opacity-40">Starke Firmen.</span>
           </h1>
 
-          {/* 3. Bottom Grid with Image */}
+          {/* 3. Bottom Grid (Text links, Bild-Karte rechts wie bei Lucis) */}
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 border-t border-[#1a1a1a]/10 pt-12">
             
-            {/* LINKE SPALTE: Text & Stats */}
-            <div className="lg:col-span-6 flex flex-col justify-between h-full">
-              <div>
-                <p className="text-xl md:text-2xl leading-relaxed text-[#1a1a1a]/80 font-light max-w-xl">
-                  Wir reduzieren Krankheitstage um bis zu <strong className="font-medium text-black">32%</strong>. 
-                  Durch die Kombination aus Gamification, Wearables und KI-Coaching schaffen wir Gesundheit, die Spaß macht.
-                </p>
-                
-                <div className="mt-8 mb-12 flex items-center gap-4">
-                   <button className="group flex items-center gap-2 border-b border-black pb-1 text-sm font-bold uppercase tracking-widest hover:opacity-60 transition-opacity">
-                     Konzept ansehen 
-                     <MoveRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                   </button>
-                </div>
-              </div>
+            {/* LINKER BEREICH: Text & Stats */}
+            <div className="lg:col-span-7 flex flex-col justify-between">
+              <p className="text-xl md:text-2xl leading-relaxed text-[#1a1a1a]/80 font-light max-w-2xl mb-12">
+                Wir reduzieren Krankheitstage um bis zu <strong className="font-medium text-black">32%</strong>. 
+                Durch die Kombination aus Gamification, Wearables und KI-Coaching schaffen wir Gesundheit, die Spaß macht.
+              </p>
+              
+              <div className="flex flex-col md:flex-row gap-8 items-start md:items-center">
+                 {/* CTA Button */}
+                 <button className="group flex items-center gap-3 bg-[#1a1a1a] text-white px-8 py-4 rounded-full text-xs font-bold uppercase tracking-widest hover:scale-105 transition-all">
+                   Konzept ansehen 
+                   <MoveRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                 </button>
 
-              {/* Stats Boxen (jetzt hier links unten) */}
-              <div className="flex flex-col md:flex-row gap-6 mt-auto">
-                 {/* Stat 1: Dunkle Box */}
-                 <div className="flex-1 bg-[#1a1a1a] text-white p-6 rounded-[2rem] flex flex-col justify-between min-h-[160px] hover:scale-[1.02] transition-transform">
-                   <div className="text-[3.5rem] font-serif italic leading-none mb-2">89%</div>
-                   <div className="text-[10px] uppercase tracking-[0.2em] opacity-60 border-t border-white/20 pt-4 mt-auto">
-                     Engagement Rate
-                   </div>
-                 </div>
-
-                 {/* Stat 2: Helle Box */}
-                 <div className="flex-1 bg-white border border-[#1a1a1a]/5 p-6 rounded-[2rem] flex flex-col justify-between min-h-[160px] shadow-sm hover:shadow-md transition-all">
-                   <div className="text-[3.5rem] font-light leading-none mb-2 text-[#1a1a1a]">-32%</div>
-                   <div className="text-[10px] uppercase tracking-[0.2em] opacity-50 border-t border-black/10 pt-4 mt-auto">
-                     Weniger Fehltage
-                   </div>
+                 {/* Stats integriert */}
+                 <div className="flex gap-8 border-l border-black/10 pl-8">
+                    <div>
+                      <div className="text-3xl font-serif italic mb-1">-32%</div>
+                      <div className="text-[9px] uppercase tracking-widest opacity-50">Fehltage</div>
+                    </div>
+                    <div>
+                      <div className="text-3xl font-serif italic mb-1">89%</div>
+                      <div className="text-[9px] uppercase tracking-widest opacity-50">Engagement</div>
+                    </div>
                  </div>
               </div>
             </div>
 
-            {/* RECHTE SPALTE: Grosses Hero Bild */}
-            <div className="lg:col-span-6 relative min-h-[500px] h-full rounded-[3rem] overflow-hidden group">
-              {/* Bild */}
-              <img 
-                src="https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=2301&auto=format&fit=crop" 
-                alt="Modern Office" 
-                className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-              />
-              {/* Overlay Gradient (optional für bessere Lesbarkeit falls Text drauf käme) */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+            {/* RECHTER BEREICH: Lucis Style Media Card (Bild/Video Placeholder) */}
+            <div className="lg:col-span-5 relative group cursor-pointer">
+              <div className="relative overflow-hidden rounded-[2.5rem] aspect-[4/3] shadow-lg border border-black/5">
+                {/* Bild */}
+                <img 
+                  src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?q=80&w=2070&auto=format&fit=crop" 
+                  alt="Vital Workflow App Nutzung" 
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                />
+                
+                {/* Overlay & Play Button (wie ein Showreel) */}
+                <div className="absolute inset-0 bg-black/10 group-hover:bg-black/20 transition-colors flex items-center justify-center">
+                  <div className="w-16 h-16 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center border border-white/40 group-hover:scale-110 transition-transform">
+                     <Play fill="white" className="text-white ml-1" size={24} />
+                  </div>
+                </div>
+
+                {/* Badge im Bild */}
+                <div className="absolute bottom-6 left-6 right-6 flex justify-between items-end">
+                  <div className="bg-white/90 backdrop-blur px-4 py-2 rounded-xl text-[10px] font-bold uppercase tracking-widest shadow-sm">
+                    Vital App Preview
+                  </div>
+                </div>
+              </div>
               
-              {/* Kleines Badge im Bild */}
-              <div className="absolute bottom-8 right-8 bg-white/90 backdrop-blur-md px-6 py-3 rounded-full text-xs font-bold uppercase tracking-widest shadow-lg">
-                Vital Workflow App
+              {/* Dekorativer Text unter dem Bild (wie bei Lucis oft) */}
+              <div className="mt-4 flex justify-between text-[10px] uppercase tracking-widest opacity-40 px-2">
+                <span>Showreel 2026</span>
+                <span>01:45 Min</span>
               </div>
             </div>
 
