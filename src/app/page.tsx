@@ -35,14 +35,14 @@ export default function Home() {
         </div>
       </nav>
 
-      {/* --- HERO SECTION (Hier ist das Design aus dem Bild) --- */}
+      {/* --- HERO SECTION --- */}
       <main className="pt-48 px-6 max-w-[1400px] mx-auto mb-40">
         <motion.div 
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
         >
-          {/* 1. Top Badge (Der "Pill"-Button oben links) */}
+          {/* 1. Top Badge */}
           <div className="flex justify-start mb-12">
             <div className="inline-flex items-center gap-3 border border-[#1a1a1a]/10 px-5 py-2.5 rounded-full bg-white shadow-sm hover:shadow-md transition-shadow cursor-default">
               <span className="relative flex h-2.5 w-2.5">
@@ -55,54 +55,69 @@ export default function Home() {
             </div>
           </div>
 
-          {/* 2. Main Headline (Massiv & Elegant) */}
+          {/* 2. Main Headline */}
           <h1 className="text-[13vw] md:text-[8.5rem] leading-[0.85] tracking-[-0.03em] mb-16 text-[#1a1a1a] font-light">
             Gesunde <br />
-            {/* Serif & Italic für den emotionalen Teil */}
             <span className="font-serif italic text-black/90">Mitarbeitende.</span> <br />
-            {/* Wieder Sans-Serif für den Abschluss */}
             <span className="opacity-40">Starke Firmen.</span>
           </h1>
 
-          {/* 3. Bottom Grid (Beschreibung links, Stats rechts) */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 border-t border-[#1a1a1a]/10 pt-12 items-start">
+          {/* 3. Bottom Grid with Image */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 border-t border-[#1a1a1a]/10 pt-12">
             
-            {/* Linke Seite: Text */}
-            <div className="lg:col-span-5">
-              <p className="text-xl md:text-2xl leading-relaxed text-[#1a1a1a]/80 font-light">
-                Wir reduzieren Krankheitstage um bis zu <strong className="font-medium text-black">32%</strong>. 
-                Durch die Kombination aus Gamification, Wearables und KI-Coaching schaffen wir Gesundheit, die Spaß macht.
-              </p>
-              
-              <div className="mt-8 flex items-center gap-4">
-                 <button className="group flex items-center gap-2 border-b border-black pb-1 text-sm font-bold uppercase tracking-widest hover:opacity-60 transition-opacity">
-                   Konzept ansehen 
-                   <MoveRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                 </button>
+            {/* LINKE SPALTE: Text & Stats */}
+            <div className="lg:col-span-6 flex flex-col justify-between h-full">
+              <div>
+                <p className="text-xl md:text-2xl leading-relaxed text-[#1a1a1a]/80 font-light max-w-xl">
+                  Wir reduzieren Krankheitstage um bis zu <strong className="font-medium text-black">32%</strong>. 
+                  Durch die Kombination aus Gamification, Wearables und KI-Coaching schaffen wir Gesundheit, die Spaß macht.
+                </p>
+                
+                <div className="mt-8 mb-12 flex items-center gap-4">
+                   <button className="group flex items-center gap-2 border-b border-black pb-1 text-sm font-bold uppercase tracking-widest hover:opacity-60 transition-opacity">
+                     Konzept ansehen 
+                     <MoveRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                   </button>
+                </div>
+              </div>
+
+              {/* Stats Boxen (jetzt hier links unten) */}
+              <div className="flex flex-col md:flex-row gap-6 mt-auto">
+                 {/* Stat 1: Dunkle Box */}
+                 <div className="flex-1 bg-[#1a1a1a] text-white p-6 rounded-[2rem] flex flex-col justify-between min-h-[160px] hover:scale-[1.02] transition-transform">
+                   <div className="text-[3.5rem] font-serif italic leading-none mb-2">89%</div>
+                   <div className="text-[10px] uppercase tracking-[0.2em] opacity-60 border-t border-white/20 pt-4 mt-auto">
+                     Engagement Rate
+                   </div>
+                 </div>
+
+                 {/* Stat 2: Helle Box */}
+                 <div className="flex-1 bg-white border border-[#1a1a1a]/5 p-6 rounded-[2rem] flex flex-col justify-between min-h-[160px] shadow-sm hover:shadow-md transition-all">
+                   <div className="text-[3.5rem] font-light leading-none mb-2 text-[#1a1a1a]">-32%</div>
+                   <div className="text-[10px] uppercase tracking-[0.2em] opacity-50 border-t border-black/10 pt-4 mt-auto">
+                     Weniger Fehltage
+                   </div>
+                 </div>
               </div>
             </div>
 
-            {/* Platzhalter */}
-            <div className="lg:col-span-1"></div>
-
-            {/* Rechte Seite: Statistik Boxen */}
-            <div className="lg:col-span-6 flex flex-col md:flex-row gap-6">
-               {/* Stat 1: Dunkle Box */}
-               <div className="flex-1 bg-[#1a1a1a] text-white p-8 rounded-[2rem] flex flex-col justify-between min-h-[180px] hover:scale-[1.02] transition-transform">
-                 <div className="text-[4rem] font-serif italic leading-none mb-2">89%</div>
-                 <div className="text-[10px] uppercase tracking-[0.2em] opacity-60 border-t border-white/20 pt-4 mt-auto">
-                   Engagement Rate
-                 </div>
-               </div>
-
-               {/* Stat 2: Helle Box */}
-               <div className="flex-1 bg-white border border-[#1a1a1a]/5 p-8 rounded-[2rem] flex flex-col justify-between min-h-[180px] shadow-sm hover:shadow-md transition-all">
-                 <div className="text-[4rem] font-light leading-none mb-2 text-[#1a1a1a]">-32%</div>
-                 <div className="text-[10px] uppercase tracking-[0.2em] opacity-50 border-t border-black/10 pt-4 mt-auto">
-                   Weniger Fehltage
-                 </div>
-               </div>
+            {/* RECHTE SPALTE: Grosses Hero Bild */}
+            <div className="lg:col-span-6 relative min-h-[500px] h-full rounded-[3rem] overflow-hidden group">
+              {/* Bild */}
+              <img 
+                src="https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=2301&auto=format&fit=crop" 
+                alt="Modern Office" 
+                className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+              />
+              {/* Overlay Gradient (optional für bessere Lesbarkeit falls Text drauf käme) */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+              
+              {/* Kleines Badge im Bild */}
+              <div className="absolute bottom-8 right-8 bg-white/90 backdrop-blur-md px-6 py-3 rounded-full text-xs font-bold uppercase tracking-widest shadow-lg">
+                Vital Workflow App
+              </div>
             </div>
+
           </div>
 
         </motion.div>
