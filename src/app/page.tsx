@@ -13,60 +13,98 @@ import {
 
 export default function Home() {
   return (
-    <div className="min-h-screen pb-20">
+    <div className="min-h-screen pb-20 bg-[#FDFCFA]">
       
-      {/* --- NAVIGATION (Minimalistisch) --- */}
+      {/* --- NAVIGATION --- */}
       <nav className="fixed top-0 w-full z-50 bg-[#FDFCFA]/80 backdrop-blur-md border-b border-black/5">
-        <div className="max-w-[1400px] mx-auto px-6 h-20 flex justify-between items-center">
-          <span className="font-serif italic text-xl font-bold tracking-tight">Vital Workflow</span>
+        <div className="max-w-[1400px] mx-auto px-6 h-24 flex justify-between items-center">
+          {/* Logo / Brand */}
+          <span className="font-serif italic text-2xl font-bold tracking-tight text-[#1a1a1a]">Vital Workflow</span>
           
-          <div className="hidden md:flex gap-8 text-[11px] font-sans font-bold uppercase tracking-[0.2em] opacity-60">
-            <a href="#features" className="hover:opacity-100">Funktionen</a>
-            <a href="#process" className="hover:opacity-100">Prozess</a>
-            <a href="#pricing" className="hover:opacity-100">Preise</a>
+          {/* Menu */}
+          <div className="hidden md:flex gap-10 text-[11px] font-sans font-bold uppercase tracking-[0.2em] opacity-60 text-[#1a1a1a]">
+            <a href="#features" className="hover:opacity-100 transition-opacity">Funktionen</a>
+            <a href="#process" className="hover:opacity-100 transition-opacity">Prozess</a>
+            <a href="#pricing" className="hover:opacity-100 transition-opacity">Preise</a>
           </div>
 
-          <button className="bg-[#1a1a1a] text-white text-[10px] font-bold uppercase tracking-[0.2em] px-6 py-3 rounded-full hover:scale-105">
+          {/* CTA Button */}
+          <button className="bg-[#1a1a1a] text-white text-[10px] font-bold uppercase tracking-[0.2em] px-8 py-4 rounded-full hover:scale-105 transition-transform duration-300">
             Erstgespräch
           </button>
         </div>
       </nav>
 
-      {/* --- HERO SECTION --- */}
-      <main className="pt-48 px-6 max-w-[1400px] mx-auto mb-32">
+      {/* --- HERO SECTION (Hier ist das Design aus dem Bild) --- */}
+      <main className="pt-48 px-6 max-w-[1400px] mx-auto mb-40">
         <motion.div 
-          initial={{ opacity: 0, y: 40 }}
+          initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
         >
-          {/* Status Badge */}
-          <div className="inline-flex items-center gap-2 border border-black/10 px-4 py-2 rounded-full mb-8 bg-white">
-            <span className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></span>
-            <span className="text-[10px] uppercase tracking-widest opacity-60">Corporate Health Management</span>
+          {/* 1. Top Badge (Der "Pill"-Button oben links) */}
+          <div className="flex justify-start mb-12">
+            <div className="inline-flex items-center gap-3 border border-[#1a1a1a]/10 px-5 py-2.5 rounded-full bg-white shadow-sm hover:shadow-md transition-shadow cursor-default">
+              <span className="relative flex h-2.5 w-2.5">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
+              </span>
+              <span className="text-[10px] font-bold uppercase tracking-[0.25em] text-[#1a1a1a]/70">
+                Corporate Health Management
+              </span>
+            </div>
           </div>
 
-          {/* Headline im Lucis-Stil */}
-          <h1 className="text-[12vw] md:text-[7rem] leading-[0.9] font-light tracking-[-0.02em] mb-12 text-[#1a1a1a]">
+          {/* 2. Main Headline (Massiv & Elegant) */}
+          <h1 className="text-[13vw] md:text-[8.5rem] leading-[0.85] tracking-[-0.03em] mb-16 text-[#1a1a1a] font-light">
             Gesunde <br />
-            <span className="font-serif italic text-black/40">Mitarbeitende.</span>
+            {/* Serif & Italic für den emotionalen Teil */}
+            <span className="font-serif italic text-black/90">Mitarbeitende.</span> <br />
+            {/* Wieder Sans-Serif für den Abschluss */}
+            <span className="opacity-40">Starke Firmen.</span>
           </h1>
 
-          <div className="flex flex-col md:flex-row justify-between items-end gap-12 border-t border-black/10 pt-12">
-            <p className="text-xl md:text-2xl leading-relaxed max-w-xl opacity-70 font-light">
-              Wir reduzieren Krankheitstage um bis zu <strong className="font-medium text-black">32%</strong> durch Gamification, Wearables und KI-Coaching.
-            </p>
+          {/* 3. Bottom Grid (Beschreibung links, Stats rechts) */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 border-t border-[#1a1a1a]/10 pt-12 items-start">
             
-            <div className="flex gap-4">
-               <div className="bg-[#1a1a1a] text-white p-6 rounded-2xl min-w-[160px]">
-                 <div className="text-3xl font-bold mb-1">89%</div>
-                 <div className="text-[10px] uppercase tracking-widest opacity-60">Engagement</div>
+            {/* Linke Seite: Text */}
+            <div className="lg:col-span-5">
+              <p className="text-xl md:text-2xl leading-relaxed text-[#1a1a1a]/80 font-light">
+                Wir reduzieren Krankheitstage um bis zu <strong className="font-medium text-black">32%</strong>. 
+                Durch die Kombination aus Gamification, Wearables und KI-Coaching schaffen wir Gesundheit, die Spaß macht.
+              </p>
+              
+              <div className="mt-8 flex items-center gap-4">
+                 <button className="group flex items-center gap-2 border-b border-black pb-1 text-sm font-bold uppercase tracking-widest hover:opacity-60 transition-opacity">
+                   Konzept ansehen 
+                   <MoveRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                 </button>
+              </div>
+            </div>
+
+            {/* Platzhalter */}
+            <div className="lg:col-span-1"></div>
+
+            {/* Rechte Seite: Statistik Boxen */}
+            <div className="lg:col-span-6 flex flex-col md:flex-row gap-6">
+               {/* Stat 1: Dunkle Box */}
+               <div className="flex-1 bg-[#1a1a1a] text-white p-8 rounded-[2rem] flex flex-col justify-between min-h-[180px] hover:scale-[1.02] transition-transform">
+                 <div className="text-[4rem] font-serif italic leading-none mb-2">89%</div>
+                 <div className="text-[10px] uppercase tracking-[0.2em] opacity-60 border-t border-white/20 pt-4 mt-auto">
+                   Engagement Rate
+                 </div>
                </div>
-               <div className="bg-white border border-black/5 p-6 rounded-2xl min-w-[160px]">
-                 <div className="text-3xl font-bold mb-1">Ø 20</div>
-                 <div className="text-[10px] uppercase tracking-widest opacity-60">Fehltage/Jahr</div>
+
+               {/* Stat 2: Helle Box */}
+               <div className="flex-1 bg-white border border-[#1a1a1a]/5 p-8 rounded-[2rem] flex flex-col justify-between min-h-[180px] shadow-sm hover:shadow-md transition-all">
+                 <div className="text-[4rem] font-light leading-none mb-2 text-[#1a1a1a]">-32%</div>
+                 <div className="text-[10px] uppercase tracking-[0.2em] opacity-50 border-t border-black/10 pt-4 mt-auto">
+                   Weniger Fehltage
+                 </div>
                </div>
             </div>
           </div>
+
         </motion.div>
       </main>
 
