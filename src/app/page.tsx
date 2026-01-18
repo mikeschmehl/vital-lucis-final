@@ -6,7 +6,6 @@ import {
   Trophy, 
   Brain, 
   ArrowUpRight, 
-  Users, 
   CheckCircle2,
   MoveRight,
   Play
@@ -14,39 +13,36 @@ import {
 
 export default function Home() {
   return (
-    <div className="min-h-screen pb-20 bg-[#FDFCFA]">
+    <div className="min-h-screen bg-[#F9F9F9] text-[#111111] font-sans selection:bg-black selection:text-white">
       
-      {/* --- NAVIGATION (1:1 Lucis Style) --- */}
-      <nav className="fixed top-0 w-full z-50 bg-[#FDFCFA]/80 backdrop-blur-xl border-b border-[#1a1a1a]/5 transition-all duration-300">
-        <div className="max-w-[1600px] mx-auto px-6 h-20 md:h-24 grid grid-cols-2 md:grid-cols-3 items-center">
+      {/* --- NAVIGATION (REPARIERT & PERFEKT ZENTRIERT) --- */}
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-[#F9F9F9]/90 backdrop-blur-md h-24 border-b border-black/5">
+        <div className="max-w-[1400px] mx-auto px-6 h-full flex items-center justify-between relative">
           
           {/* 1. Logo (Links) */}
-          <div className="flex justify-start">
-            <span className="font-serif italic text-xl md:text-2xl font-bold tracking-tight text-[#1a1a1a]">
+          <div className="z-10 flex-shrink-0">
+            <span className="font-serif italic text-2xl font-bold tracking-tight">
               Vital Workflow
             </span>
           </div>
           
-          {/* 2. Menü (Absolut Zentriert) */}
-          <div className="hidden md:flex justify-center items-center gap-12">
-            <a href="#features" className="text-[11px] font-sans font-medium uppercase tracking-[0.2em] text-[#1a1a1a]/60 hover:text-[#1a1a1a] transition-colors relative group">
+          {/* 2. Menü (ABSOLUT ZENTRIERT - Bewegt sich keinen Millimeter) */}
+          <div className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 hidden md:flex items-center gap-12">
+            <a href="#features" className="text-[11px] font-bold uppercase tracking-[0.2em] opacity-50 hover:opacity-100 transition-opacity">
               Funktionen
-              <span className="absolute -bottom-1 left-0 w-0 h-px bg-black transition-all group-hover:w-full"></span>
             </a>
-            <a href="#process" className="text-[11px] font-sans font-medium uppercase tracking-[0.2em] text-[#1a1a1a]/60 hover:text-[#1a1a1a] transition-colors relative group">
+            <a href="#process" className="text-[11px] font-bold uppercase tracking-[0.2em] opacity-50 hover:opacity-100 transition-opacity">
               Prozess
-              <span className="absolute -bottom-1 left-0 w-0 h-px bg-black transition-all group-hover:w-full"></span>
             </a>
-            <a href="#pricing" className="text-[11px] font-sans font-medium uppercase tracking-[0.2em] text-[#1a1a1a]/60 hover:text-[#1a1a1a] transition-colors relative group">
+            <a href="#pricing" className="text-[11px] font-bold uppercase tracking-[0.2em] opacity-50 hover:opacity-100 transition-opacity">
               Preise
-              <span className="absolute -bottom-1 left-0 w-0 h-px bg-black transition-all group-hover:w-full"></span>
             </a>
           </div>
 
-          {/* 3. CTA Button (Rechts) */}
-          <div className="flex justify-end">
-            <button className="bg-[#1a1a1a] text-white text-[10px] font-bold uppercase tracking-[0.2em] px-6 py-3 md:px-8 md:py-3.5 rounded-full hover:scale-105 hover:shadow-lg transition-all duration-300">
-              Erstgespräch
+          {/* 3. Button (Rechts) */}
+          <div className="z-10 flex-shrink-0">
+            <button className="bg-[#111111] text-white text-[10px] font-bold uppercase tracking-[0.2em] px-8 py-3 rounded-full hover:scale-105 transition-transform">
+              Starten
             </button>
           </div>
 
@@ -54,223 +50,118 @@ export default function Home() {
       </nav>
 
       {/* --- HERO SECTION --- */}
-      <main className="pt-48 px-6 max-w-[1400px] mx-auto mb-40">
+      <main className="pt-48 px-6 max-w-[1400px] mx-auto mb-32">
         <motion.div 
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
+          transition={{ duration: 0.8 }}
+          className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center"
         >
-          {/* 1. Top Badge */}
-          <div className="flex justify-start mb-12">
-            <div className="inline-flex items-center gap-3 border border-[#1a1a1a]/10 px-5 py-2.5 rounded-full bg-white shadow-sm hover:shadow-md transition-shadow cursor-default">
-              <span className="relative flex h-2.5 w-2.5">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
-              </span>
-              <span className="text-[10px] font-bold uppercase tracking-[0.25em] text-[#1a1a1a]/70">
-                Corporate Health Management
-              </span>
-            </div>
+          
+          {/* LINKER TEIL: Text */}
+          <div className="lg:col-span-7">
+             {/* Badge */}
+             <div className="inline-flex items-center gap-2 mb-10 opacity-50">
+               <span className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></span>
+               <span className="text-[10px] uppercase tracking-[0.2em] font-bold">Health Management System</span>
+             </div>
+
+             {/* Headline */}
+             <h1 className="text-[12vw] md:text-[7.5rem] leading-[0.9] font-light tracking-[-0.03em] mb-12 text-[#111111]">
+               Gesunde <br />
+               <span className="font-serif italic text-gray-400">Teams.</span>
+             </h1>
+
+             <p className="text-xl md:text-2xl leading-relaxed opacity-70 font-light max-w-xl mb-12">
+               Wir reduzieren Krankheitstage um <strong className="text-black font-medium">-32%</strong>. 
+               Durch Gamification, Wearables und KI-Coaching machen wir Gesundheit messbar.
+             </p>
+
+             <div className="flex gap-8 items-center border-t border-black/5 pt-8">
+                <div className="pr-8 border-r border-black/5">
+                   <div className="text-3xl font-serif italic mb-1">89%</div>
+                   <div className="text-[9px] uppercase tracking-widest opacity-40">Engagement</div>
+                </div>
+                <div>
+                   <div className="text-3xl font-serif italic mb-1">-32%</div>
+                   <div className="text-[9px] uppercase tracking-widest opacity-40">Fehltage</div>
+                </div>
+             </div>
           </div>
 
-          {/* 2. Main Headline (Lucis Style) */}
-          <h1 className="text-[13vw] md:text-[8.5rem] leading-[0.85] tracking-[-0.03em] mb-16 text-[#1a1a1a] font-light">
-            Gesunde <br />
-            <span className="font-serif italic text-black/90">Mitarbeitende.</span> <br />
-            <span className="opacity-40">Starke Firmen.</span>
-          </h1>
+          {/* RECHTER TEIL: Elegantes Bild (Media Card) */}
+          <div className="lg:col-span-5 relative group">
+             <div className="aspect-[4/5] rounded-[2rem] overflow-hidden relative shadow-2xl shadow-gray-200">
+               <img 
+                 src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?q=80&w=2070&auto=format&fit=crop" 
+                 alt="Vital Workflow App" 
+                 className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
+               />
+               <div className="absolute inset-0 bg-black/10 group-hover:bg-black/0 transition-colors"></div>
+               
+               {/* Play Button Overlay */}
+               <div className="absolute inset-0 flex items-center justify-center">
+                  <div className="w-20 h-20 bg-white/20 backdrop-blur-xl rounded-full flex items-center justify-center border border-white/30 cursor-pointer hover:scale-110 transition-transform">
+                     <Play fill="white" className="text-white ml-1" />
+                  </div>
+               </div>
 
-          {/* 3. Bottom Grid (Text links, Bild-Karte rechts wie bei Lucis) */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 border-t border-[#1a1a1a]/10 pt-12">
-            
-            {/* LINKER BEREICH: Text & Stats */}
-            <div className="lg:col-span-7 flex flex-col justify-between">
-              <p className="text-xl md:text-2xl leading-relaxed text-[#1a1a1a]/80 font-light max-w-2xl mb-12">
-                Wir reduzieren Krankheitstage um bis zu <strong className="font-medium text-black">32%</strong>. 
-                Durch die Kombination aus Gamification, Wearables und KI-Coaching schaffen wir Gesundheit, die Spaß macht.
-              </p>
-              
-              <div className="flex flex-col md:flex-row gap-8 items-start md:items-center">
-                 {/* CTA Button */}
-                 <button className="group flex items-center gap-3 bg-[#1a1a1a] text-white px-8 py-4 rounded-full text-xs font-bold uppercase tracking-widest hover:scale-105 transition-all">
-                   Konzept ansehen 
-                   <MoveRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                 </button>
-
-                 {/* Stats integriert */}
-                 <div className="flex gap-8 border-l border-black/10 pl-8">
-                    <div>
-                      <div className="text-3xl font-serif italic mb-1">-32%</div>
-                      <div className="text-[9px] uppercase tracking-widest opacity-50">Fehltage</div>
-                    </div>
-                    <div>
-                      <div className="text-3xl font-serif italic mb-1">89%</div>
-                      <div className="text-[9px] uppercase tracking-widest opacity-50">Engagement</div>
-                    </div>
+               {/* Caption unten im Bild */}
+               <div className="absolute bottom-8 left-8 right-8">
+                 <div className="bg-white/90 backdrop-blur px-5 py-3 rounded-xl inline-block shadow-lg">
+                   <div className="flex items-center gap-3">
+                     <div className="w-2 h-2 bg-red-500 rounded-full animate-pulse"></div>
+                     <span className="text-[10px] font-bold uppercase tracking-widest">Showreel 2026</span>
+                   </div>
                  </div>
-              </div>
-            </div>
-
-            {/* RECHTER BEREICH: Lucis Style Media Card (Bild/Video Placeholder) */}
-            <div className="lg:col-span-5 relative group cursor-pointer">
-              <div className="relative overflow-hidden rounded-[2.5rem] aspect-[4/3] shadow-lg border border-black/5">
-                {/* Bild */}
-                <img 
-                  src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?q=80&w=2070&auto=format&fit=crop" 
-                  alt="Vital Workflow App Nutzung" 
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                />
-                
-                {/* Overlay & Play Button (wie ein Showreel) */}
-                <div className="absolute inset-0 bg-black/10 group-hover:bg-black/20 transition-colors flex items-center justify-center">
-                  <div className="w-16 h-16 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center border border-white/40 group-hover:scale-110 transition-transform">
-                     <Play fill="white" className="text-white ml-1" size={24} />
-                  </div>
-                </div>
-
-                {/* Badge im Bild */}
-                <div className="absolute bottom-6 left-6 right-6 flex justify-between items-end">
-                  <div className="bg-white/90 backdrop-blur px-4 py-2 rounded-xl text-[10px] font-bold uppercase tracking-widest shadow-sm">
-                    Vital App Preview
-                  </div>
-                </div>
-              </div>
-              
-              {/* Dekorativer Text unter dem Bild (wie bei Lucis oft) */}
-              <div className="mt-4 flex justify-between text-[10px] uppercase tracking-widest opacity-40 px-2">
-                <span>Showreel 2026</span>
-                <span>01:45 Min</span>
-              </div>
-            </div>
-
+               </div>
+             </div>
           </div>
 
         </motion.div>
       </main>
 
-      {/* --- BENTO GRID (Funktionen) --- */}
-      <section id="features" className="px-6 max-w-[1400px] mx-auto mb-40">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 auto-rows-[400px]">
-          
-          {/* Card 1: Echtzeit Daten (Gross) */}
-          <div className="md:col-span-2 bg-white rounded-[2.5rem] p-12 border border-black/5 hover:shadow-xl transition-all group flex flex-col justify-between relative overflow-hidden">
-             <div className="absolute top-12 right-12 p-4 bg-gray-50 rounded-full group-hover:scale-110 transition-transform">
-                <Activity size={32} strokeWidth={1.5} />
+      {/* --- BENTO GRID --- */}
+      <section id="features" className="px-6 max-w-[1400px] mx-auto pb-40">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {/* Card 1 */}
+          <div className="bg-white p-10 rounded-[2.5rem] border border-black/5 hover:shadow-xl transition-all min-h-[350px] flex flex-col justify-between group">
+             <div className="w-12 h-12 bg-gray-50 rounded-full flex items-center justify-center group-hover:bg-black group-hover:text-white transition-colors">
+               <Activity size={20} />
              </div>
-             <div className="max-w-md z-10">
-               <h3 className="text-4xl font-serif italic mb-6">Echtzeit Daten</h3>
-               <p className="opacity-60 text-lg">
-                 Alle relevanten Daten im Überblick. Wir integrieren Wearables, um jedem Nutzer eine faire Teilnahme zu gewährleisten – egal ob Marathonläufer oder Spaziergänger.
-               </p>
+             <div>
+               <h3 className="text-2xl font-serif italic mb-3">Echtzeit Daten</h3>
+               <p className="text-sm opacity-50 leading-relaxed">Integration von Wearables für faire, datenbasierte Gesundheitsförderung.</p>
              </div>
-             {/* Dekoration */}
-             <div className="absolute bottom-0 right-0 w-64 h-64 bg-emerald-500/10 rounded-tl-[100px]"></div>
           </div>
 
-          {/* Card 2: KI Coaching (Hochkant) */}
-          <div className="bg-[#1a1a1a] text-[#FDFCFA] rounded-[2.5rem] p-10 flex flex-col justify-between group relative overflow-hidden">
+          {/* Card 2 (Dark) */}
+          <div className="bg-[#111111] text-white p-10 rounded-[2.5rem] border border-black/5 hover:shadow-xl transition-all min-h-[350px] flex flex-col justify-between relative overflow-hidden group">
              <div className="w-12 h-12 bg-white/10 rounded-full flex items-center justify-center backdrop-blur-md">
-               <Brain size={24} />
+               <Trophy size={20} />
              </div>
-             <div>
-               <h3 className="text-3xl font-light mb-4">KI-Assistent</h3>
-               <p className="opacity-50 text-sm leading-relaxed">
-                 Persönliche Analysen und Tipps basierend auf Gesundheitsbögen. 24/7 verfügbar.
-               </p>
+             <div className="relative z-10">
+               <h3 className="text-2xl font-light mb-3">Gamification</h3>
+               <p className="text-sm opacity-60 leading-relaxed">Punkte sammeln und im Team Level aufsteigen. Motivation pur.</p>
              </div>
-             <div className="absolute top-1/2 right-0 translate-x-1/2 -translate-y-1/2 w-32 h-32 bg-purple-500/20 blur-[50px] rounded-full"></div>
-          </div>
-
-          {/* Card 3: Gamification */}
-          <div className="bg-[#EAE8E4] rounded-[2.5rem] p-10 flex flex-col justify-between group">
-             <Trophy size={40} className="opacity-30 group-hover:opacity-100 transition-opacity" />
-             <div>
-               <h3 className="text-2xl font-serif italic mb-2">Gamification</h3>
-               <p className="opacity-60 text-sm">Punkte sammeln, Level aufsteigen, echte Prämien sichern.</p>
+             <div className="absolute top-0 right-0 p-8 opacity-0 group-hover:opacity-100 transition-opacity">
+               <ArrowUpRight />
              </div>
           </div>
 
-          {/* Card 4: Corporate Benefits (Gross) */}
-          <div className="md:col-span-2 bg-white rounded-[2.5rem] p-12 border border-black/5 flex flex-col md:flex-row items-center justify-between gap-10">
-             <div>
-               <h3 className="text-3xl font-light mb-4">Reduktion & Prävention</h3>
-               <p className="opacity-60 max-w-md mb-8">
-                 Durchschnittlich sparen Unternehmen 294.000€ pro Jahr durch unseren Vital-Effekt.
-               </p>
-               <button className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest border-b border-black pb-1 hover:opacity-50">
-                 Whitepaper lesen <MoveRight size={14} />
-               </button>
+          {/* Card 3 */}
+          <div className="bg-[#EAE8E4] p-10 rounded-[2.5rem] border border-black/5 hover:shadow-xl transition-all min-h-[350px] flex flex-col justify-between">
+             <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center">
+               <Brain size={20} />
              </div>
-             <div className="w-full md:w-1/3 bg-gray-50 rounded-2xl p-6 text-center">
-                <div className="text-4xl font-serif italic mb-2">-32%</div>
-                <div className="text-[10px] uppercase tracking-widest opacity-40">Krankheitstage</div>
+             <div>
+               <h3 className="text-2xl font-serif italic mb-3">KI-Assistent</h3>
+               <p className="text-sm opacity-50 leading-relaxed">Tägliches Coaching basierend auf persönlichen Gesundheitsdaten.</p>
              </div>
           </div>
-
         </div>
       </section>
 
-      {/* --- PRICING (Das Vital Angebot) --- */}
-      <section id="pricing" className="px-6 max-w-[1400px] mx-auto text-center mb-40">
-        <h2 className="text-4xl md:text-6xl font-light mb-16">
-          Investieren Sie in <span className="font-serif italic text-black/40">Gesundheit.</span>
-        </h2>
-
-        <div className="inline-block bg-white border border-black/5 p-12 rounded-[3rem] shadow-2xl shadow-gray-100/50 max-w-lg w-full relative overflow-hidden">
-          <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-emerald-400 to-emerald-600"></div>
-          
-          <div className="text-[10px] uppercase tracking-[0.3em] font-bold opacity-40 mb-6">Business Plan</div>
-          
-          <div className="flex items-start justify-center mb-8">
-             <span className="text-2xl mt-2">€</span>
-             <span className="text-8xl font-serif italic tracking-tighter">30</span>
-             <span className="self-end mb-4 text-gray-400">/mtl.</span>
-          </div>
-
-          <div className="space-y-4 text-left max-w-xs mx-auto mb-10 text-sm opacity-70">
-            <div className="flex gap-3 items-center"><CheckCircle2 size={16} className="text-emerald-500"/> KI-Coaching App</div>
-            <div className="flex gap-3 items-center"><CheckCircle2 size={16} className="text-emerald-500"/> Wearable Anbindung</div>
-            <div className="flex gap-3 items-center"><CheckCircle2 size={16} className="text-emerald-500"/> HR-Dashboard</div>
-            <div className="flex gap-3 items-center"><CheckCircle2 size={16} className="text-emerald-500"/> Challenges & Boni</div>
-          </div>
-
-          <a href="mailto:service@vital-workflow.com" className="block w-full bg-[#1a1a1a] text-white py-4 rounded-full font-bold uppercase tracking-widest text-xs hover:scale-[1.02] transition-transform">
-            Angebot anfordern
-          </a>
-          <p className="mt-4 text-[10px] opacity-40">12% sparen bei jährlicher Zahlung</p>
-        </div>
-      </section>
-
-      {/* --- FOOTER --- */}
-      <footer className="bg-[#1a1a1a] text-[#FDFCFA] py-24 px-6 rounded-t-[3rem]">
-        <div className="max-w-[1400px] mx-auto flex flex-col md:flex-row justify-between items-start gap-12">
-          <div>
-             <h2 className="text-4xl font-serif italic mb-6">Vital Workflow</h2>
-             <p className="opacity-50 text-sm max-w-xs leading-relaxed">
-               SwissGevity Solutions GmbH i.G.<br />
-               Wir gestalten Gesundheit spielend leicht.
-             </p>
-          </div>
-          
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-12 text-sm opacity-60">
-            <div className="flex flex-col gap-4">
-              <span className="uppercase tracking-widest text-[10px] opacity-50 mb-2">Kontakt</span>
-              <a href="mailto:service@vital-workflow.com">Email senden</a>
-              <a href="#">Termin buchen</a>
-            </div>
-            <div className="flex flex-col gap-4">
-              <span className="uppercase tracking-widest text-[10px] opacity-50 mb-2">Rechtliches</span>
-              <a href="#">Impressum</a>
-              <a href="#">Datenschutz</a>
-              <a href="#">AGB</a>
-            </div>
-          </div>
-        </div>
-        <div className="max-w-[1400px] mx-auto mt-20 pt-8 border-t border-white/10 text-[10px] uppercase tracking-widest opacity-30 flex justify-between">
-          <span>© 2026 Vital Workflow</span>
-          <span>Made in Switzerland</span>
-        </div>
-      </footer>
     </div>
   );
 }
