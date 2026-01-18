@@ -16,23 +16,40 @@ export default function Home() {
   return (
     <div className="min-h-screen pb-20 bg-[#FDFCFA]">
       
-      {/* --- NAVIGATION --- */}
-      <nav className="fixed top-0 w-full z-50 bg-[#FDFCFA]/80 backdrop-blur-md border-b border-black/5">
-        <div className="max-w-[1400px] mx-auto px-6 h-24 flex justify-between items-center">
-          {/* Logo / Brand */}
-          <span className="font-serif italic text-2xl font-bold tracking-tight text-[#1a1a1a]">Vital Workflow</span>
+      {/* --- NAVIGATION (1:1 Lucis Style) --- */}
+      <nav className="fixed top-0 w-full z-50 bg-[#FDFCFA]/80 backdrop-blur-xl border-b border-[#1a1a1a]/5 transition-all duration-300">
+        <div className="max-w-[1600px] mx-auto px-6 h-20 md:h-24 grid grid-cols-2 md:grid-cols-3 items-center">
           
-          {/* Menu */}
-          <div className="hidden md:flex gap-10 text-[11px] font-sans font-bold uppercase tracking-[0.2em] opacity-60 text-[#1a1a1a]">
-            <a href="#features" className="hover:opacity-100 transition-opacity">Funktionen</a>
-            <a href="#process" className="hover:opacity-100 transition-opacity">Prozess</a>
-            <a href="#pricing" className="hover:opacity-100 transition-opacity">Preise</a>
+          {/* 1. Logo (Links) */}
+          <div className="flex justify-start">
+            <span className="font-serif italic text-xl md:text-2xl font-bold tracking-tight text-[#1a1a1a]">
+              Vital Workflow
+            </span>
+          </div>
+          
+          {/* 2. Menü (Absolut Zentriert) */}
+          <div className="hidden md:flex justify-center items-center gap-12">
+            <a href="#features" className="text-[11px] font-sans font-medium uppercase tracking-[0.2em] text-[#1a1a1a]/60 hover:text-[#1a1a1a] transition-colors relative group">
+              Funktionen
+              <span className="absolute -bottom-1 left-0 w-0 h-px bg-black transition-all group-hover:w-full"></span>
+            </a>
+            <a href="#process" className="text-[11px] font-sans font-medium uppercase tracking-[0.2em] text-[#1a1a1a]/60 hover:text-[#1a1a1a] transition-colors relative group">
+              Prozess
+              <span className="absolute -bottom-1 left-0 w-0 h-px bg-black transition-all group-hover:w-full"></span>
+            </a>
+            <a href="#pricing" className="text-[11px] font-sans font-medium uppercase tracking-[0.2em] text-[#1a1a1a]/60 hover:text-[#1a1a1a] transition-colors relative group">
+              Preise
+              <span className="absolute -bottom-1 left-0 w-0 h-px bg-black transition-all group-hover:w-full"></span>
+            </a>
           </div>
 
-          {/* CTA Button */}
-          <button className="bg-[#1a1a1a] text-white text-[10px] font-bold uppercase tracking-[0.2em] px-8 py-4 rounded-full hover:scale-105 transition-transform duration-300">
-            Erstgespräch
-          </button>
+          {/* 3. CTA Button (Rechts) */}
+          <div className="flex justify-end">
+            <button className="bg-[#1a1a1a] text-white text-[10px] font-bold uppercase tracking-[0.2em] px-6 py-3 md:px-8 md:py-3.5 rounded-full hover:scale-105 hover:shadow-lg transition-all duration-300">
+              Erstgespräch
+            </button>
+          </div>
+
         </div>
       </nav>
 
