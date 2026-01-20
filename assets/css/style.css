@@ -149,13 +149,19 @@ img { max-width: 100%; display: block; }
 }
 
 .btn-primary {
-    background-color: var(--color-primary);
+    background: rgba(30,30,30,0.95);
     color: #ffffff;
-    border: 1px solid var(--color-primary);
+    border: 1px solid rgba(255,255,255,0.12);
+    box-shadow: 0 2px 12px 0 rgba(0,0,0,0.2), 0 0.5px 0 0 rgba(255,255,255,0.08) inset;
+    backdrop-filter: blur(8px) saturate(180%);
+    -webkit-backdrop-filter: blur(8px) saturate(180%);
+    transition: all 0.2s ease-out;
 }
 
 .btn-primary:hover {
-    opacity: 0.85;
+    background: rgba(20,20,20,0.98);
+    border-color: rgba(255,255,255,0.18);
+    box-shadow: 0 4px 20px 0 rgba(0,0,0,0.3), 0 1px 0 0 rgba(255,255,255,0.12) inset;
     transform: translateY(-1px);
 }
 
@@ -179,21 +185,29 @@ header {
     display: flex;
     align-items: center;
     position: fixed;
-    top: 0;
-    width: 100%;
-    background: rgba(255,255,255,0.45);
-    box-shadow: 0 8px 32px 0 rgba(31,38,135,0.10);
-    border-bottom: 1.5px solid rgba(255,255,255,0.18);
-    backdrop-filter: blur(18px) saturate(180%);
-    -webkit-backdrop-filter: blur(18px) saturate(180%);
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: auto;
+    max-width: 1300px;
+    background: rgba(255,255,255,0.3);
+    box-shadow: 0 8px 32px 0 rgba(31,38,135,0.08), 0 1px 4px 0 rgba(0,0,0,0.02);
+    border: 1px solid rgba(255,255,255,0.4);
+    border-radius: 30px;
+    backdrop-filter: blur(30px) saturate(200%);
+    -webkit-backdrop-filter: blur(30px) saturate(200%);
     z-index: 1000;
-    transition: border-color 0.3s, background 0.3s;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    padding: 12px 40px 12px 40px;
+    padding-right: 1px;
+    padding-left: 2px;
 }
 
 header.scrolled {
-    background: rgba(255,255,255,0.7);
-    border-bottom: 1.5px solid rgba(31,38,135,0.10);
-    box-shadow: 0 12px 32px 0 rgba(31,38,135,0.13);
+    background: rgba(255,255,255,0.4);
+    border: 1px solid rgba(255,255,255,0.5);
+    box-shadow: 0 12px 40px 0 rgba(31,38,135,0.1), 0 2px 8px 0 rgba(0,0,0,0.04);
+    top: 12px;
 }
 
 .nav-container {
@@ -201,6 +215,8 @@ header.scrolled {
     justify-content: space-between;
     align-items: center;
     width: 100%;
+    max-width: 100%;
+    gap: 48px;
 }
 
 .logo {
@@ -216,12 +232,51 @@ header.scrolled {
 @media (min-width: 768px) {
     .nav-links {
         display: flex;
-        gap: 32px;
+        gap: 4px;
         font-size: 15px;
         font-weight: 500;
         color: #444;
+        align-items: center;
+        position: relative;
+        --pill-left: 0px;
+        --pill-width: 0px;
+        --pill-height: 0px;
+        --pill-top: 0px;
     }
-    .nav-links a:hover { color: #000; }
+    
+    .nav-links::before {
+        content: '';
+        position: absolute;
+        left: var(--pill-left);
+        top: var(--pill-top);
+        width: var(--pill-width);
+        height: var(--pill-height);
+        background: rgba(255,255,255,0.35);
+        backdrop-filter: blur(40px) saturate(200%);
+        -webkit-backdrop-filter: blur(40px) saturate(200%);
+        box-shadow: 0 2px 12px rgba(0,0,0,0.06), 0 0.5px 0 rgba(255,255,255,0.5) inset, 0 -0.5px 0 rgba(0,0,0,0.03) inset;
+        border-radius: 14px;
+        border: 0.5px solid rgba(255,255,255,0.5);
+        transition: all 0.45s cubic-bezier(0.23, 1, 0.32, 1);
+        opacity: 0;
+        pointer-events: none;
+        z-index: -1;
+    }
+    
+    .nav-links.has-active::before {
+        opacity: 1;
+    }
+    
+    .nav-links a {
+        padding: 8px 20px;
+        border-radius: 14px;
+        transition: color 0.25s ease-out;
+        position: relative;
+        z-index: 1;
+    }
+    .nav-links a:hover { 
+        color: #000;
+    }
 }
 
 .nav-actions {
@@ -231,8 +286,11 @@ header.scrolled {
 }
 
 .nav-actions .btn {
-    padding: 8px 18px;
+    padding: 10px 28px;
     font-size: 14px;
+    border-radius: 18px;
+    line-height: 1.4;
+    white-space: nowrap;
 }
 
 /* --- HERO SECTION --- */
@@ -411,6 +469,133 @@ header.scrolled {
 
 .step-card h3 { font-size: 20px; margin-bottom: 10px; font-weight: 600; }
 .step-card p { font-size: 15px; color: #666; }
+
+/* --- TEUFELSKREIS ANIMATION --- */
+.cycle-container {
+    position: relative;
+    width: 100%;
+    max-width: 900px;
+    height: 550px;
+    margin: 0 auto;
+    padding: 40px 0;
+    overflow: visible;
+}
+
+.cycle-arrows {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.glow-circle {
+    filter: blur(25px);
+    mix-blend-mode: screen;
+}
+
+.pill-shape {
+    transition: filter 0.4s ease;
+}
+
+.cycle-channel {
+    opacity: 0.9;
+    filter: drop-shadow(0 2px 8px rgba(0,0,0,0.06));
+}
+
+.cycle-pill {
+    position: absolute;
+    background: transparent;
+    backdrop-filter: blur(30px) saturate(200%);
+    -webkit-backdrop-filter: blur(30px) saturate(200%);
+    border: none;
+    border-radius: 20px;
+    padding: 20px 24px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+    max-width: 220px;
+    z-index: 10;
+}
+
+.pill-number {
+    display: inline-block;
+    width: 32px;
+    height: 32px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 32px;
+    font-weight: 600;
+    font-size: 16px;
+    margin-bottom: 12px;
+}
+
+.cycle-pill p {
+    font-size: 14px;
+    line-height: 1.6;
+    color: #333;
+    margin: 0;
+}
+
+.cycle-pill strong {
+    color: #000;
+    font-weight: 600;
+}
+
+/* Positionierung der Pills horizontal */
+.cycle-pill-1 {
+    top: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.cycle-pill-2 {
+    top: 50%;
+    right: 20px;
+    transform: translateY(-50%);
+}
+
+.cycle-pill-3 {
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.cycle-pill-4 {
+    top: 50%;
+    left: 20px;
+    transform: translateY(-50%);
+}
+
+@media (max-width: 768px) {
+    .cycle-container {
+        height: 500px;
+    }
+    
+    .cycle-arrows {
+        width: 350px;
+        height: 250px;
+    }
+    
+    .cycle-pill {
+        max-width: 160px;
+        padding: 16px 18px;
+    }
+    
+    .cycle-pill p {
+        font-size: 13px;
+    }
+    
+    .cycle-pill-2 {
+        right: 10px;
+    }
+    
+    .cycle-pill-4 {
+        left: 10px;
+    }
+}
 
 /* --- FEATURE SECTION (DASHBOARD) --- */
 .feature-section {
