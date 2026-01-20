@@ -477,8 +477,11 @@ header.scrolled {
     max-width: 900px;
     height: 550px;
     margin: 0 auto;
-    padding: 40px 0;
+    padding: 40px;
     overflow: visible;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 16px;
+    background: rgba(70, 70, 80, 0.06);
 }
 
 .cycle-arrows {
@@ -492,8 +495,9 @@ header.scrolled {
 }
 
 .glow-circle {
-    filter: blur(25px);
+    filter: blur(15px);
     mix-blend-mode: screen;
+    opacity: 1;
 }
 
 .pill-shape {
