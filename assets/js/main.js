@@ -59,6 +59,73 @@ document.addEventListener('DOMContentLoaded', () => {
     // GSAP Scroll Animation for Cycle Section
     if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
         gsap.registerPlugin(ScrollTrigger);
+        if (typeof ScrollToPlugin !== 'undefined') {
+            gsap.registerPlugin(ScrollToPlugin);
+        }
+        
+        // Smooth Scroll for Navigation Links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                // Nur interne Links behandeln
+                const targetId = this.getAttribute('href');
+                if (!targetId || targetId === '#' || targetId.indexOf('#') !== 0) return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (!targetElement) return;
+
+                // SPEZIAL-FIX für '#science' (Wie?):
+                if (targetId === '#science') {
+                    const st = ScrollTrigger.getById("how-pin");
+                    const howSection = document.querySelector('#how');
+                    const cycleWrapper = document.querySelector('.cycle-wrapper');
+                    
+                    if (st && howSection && cycleWrapper) {
+                        e.preventDefault();
+                        
+                        // Berechnung:
+                        // Wir starten bei st.end (Ende der Animation, #how ist am oberen Bildschirmrand).
+                        // Wir wollen #science sehen.
+                        // Die visuelle Höhe von #how ist nach der Animation = (Gesamthöhe - Höhe des kollabierten Kreises).
+                        // Wir scrollen also exakt diese 'verbleibende Höhe' weiter.
+                        
+                        const currentHowHeight = howSection.offsetHeight;
+                        const cycleHeight = cycleWrapper.offsetHeight; // Das wird später 0 sein, ist jetzt aber noch da.
+                        
+                        // Das ist die Höhe des Inhalts, der VOR #science steht und sichtbar bleibt (Header + Grid).
+                        const contentToScrollPast = currentHowHeight - cycleHeight;
+                        
+                        // Wir addieren einen Header-Buffer (-100px), damit die #science Überschrift nicht verdeckt wird.
+                        // Aber wir müssen sicherstellen, dass wir das Grid ganz verlassen. 
+                        // Sagen wir: Wir wollen, dass #science bei ca. 120px vom Top startet.
+                        
+                        const targetPos = st.end + contentToScrollPast + 20; // +20 für ein bisschen "Luft" zwischen Grid und Top
+
+                        gsap.to(window, {
+                            duration: 0.8, 
+                            scrollTo: targetPos, 
+                            ease: "power2.out"
+                        });
+                        return;
+                    }
+                }
+                
+                // Standard Smooth Scroll für alle anderen Links
+                e.preventDefault();
+                
+                // Header Height Buffer (damit Titel nicht verdeckt wird)
+                const headerOffset = 100;
+
+                gsap.to(window, {
+                    duration: 1.0,
+                    scrollTo: {
+                        y: targetElement,
+                        offsetY: headerOffset,
+                        autoKill: false 
+                    },
+                    ease: "power2.out" // Konsistentes Easing
+                });
+            });
+        });
         
         const cycleWrapper = document.querySelector('.cycle-wrapper');
         const benefitsGrid = document.querySelector('.benefits-grid');
@@ -74,6 +141,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const tl = gsap.timeline({
                 scrollTrigger: {
+                    id: "how-pin",
                     trigger: "#how",
                     start: "top top+=80", // Start pinning when section is slightly down (below header)
                     end: "+=800",
@@ -93,12 +161,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 marginTop: 0,
                 scale: 0.8,
                 duration: 1,
-                ease: "power2.inOut"
+                ease: "none" // Linear ease for direct 1:1 scroll control (smoother feel)
             })
             // The benefits grid naturally moves up because cycleWrapper height goes to 0.
             .to(cycleWrapper.querySelector('.cycle-container'), {
                  scale: 0.5,
-                 duration: 1
+                 duration: 1,
+                 ease: "none"
             }, "<");
             
             // Pull the next section up to close the gap dynamically
@@ -107,7 +176,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 tl.to(scienceSection, {
                     marginTop: -cycleHeight, 
                     duration: 1,
-                    ease: "power2.inOut"
+                    ease: "none"
                 }, "<");
             }
         }
@@ -206,3 +275,136 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
     }
+
+    /* --- 3D Chip Card Tilt Effect --- */
+    const cards = document.querySelectorAll(".pricing-card-v2__image");
+
+    cards.forEach(card => {
+        card.addEventListener("mousemove", (e) => {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            
+            // Calculate center
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+            
+            // Calculate tilt degrees (max 20deg)
+            const rotateX = ((y - centerY) / centerY) * -20; 
+            const rotateY = ((x - centerX) / centerX) * 20;
+
+            // Apply transform with perspective
+            // Scale up slightly to enhance "lift" feeling
+            card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.05, 1.05, 1.05)`;
+        });
+
+        card.addEventListener("mouseleave", () => {
+            // Reset state
+            card.style.transform = "perspective(1000px) rotateX(0) rotateY(0) scale3d(1, 1, 1)";
+            // Add transition for smooth return
+            card.style.transition = "transform 0.5s ease";
+        });
+
+        card.addEventListener("mouseenter", () => {
+            // Remove transition during movement for instant response
+            card.style.transition = "none";
+        });
+    });
+
+    /* --- FULL 3D CARD INTERACTION --- */
+    // Target the full card container now
+    const fullCards = document.querySelectorAll(".full-3d-card");
+
+    fullCards.forEach(card => {
+        card.addEventListener("mousemove", (e) => {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+            
+            // Softer tilt for larger object (max 8deg)
+            const rotateX = ((y - centerY) / centerY) * -8; 
+            const rotateY = ((x - centerX) / centerX) * 8;
+
+            card.style.transition = "none";
+            // 60px translateZ gives it "volume" in perspective
+            card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+            
+            // Adjust shine position based on mouse
+            const shine = card.querySelector('.card-shine');
+            if(shine) {
+                const moveX = ((x - centerX) / centerX) * -20; 
+                const moveY = ((y - centerY) / centerY) * -20;
+                shine.style.backgroundPosition = `${moveX}% ${moveY}%`;
+            }
+        });
+
+        card.addEventListener("mouseleave", () => {
+            card.style.transition = "transform 0.6s cubic-bezier(0.23, 1, 0.32, 1)";
+            card.style.transform = "rotateX(0) rotateY(0) scale3d(1, 1, 1)";
+        });
+        
+        card.addEventListener("mouseenter", () => {
+            // instant engage
+            card.style.transition = "none";
+        });
+    });
+
+    /* --- REALISTIC CREDIT CARD TILT EFFECT --- */
+    const creditCards = document.querySelectorAll(".credit-card-3d");
+
+    creditCards.forEach(card => {
+        card.addEventListener("mousemove", (e) => {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+            
+            // Standard card tilt (approx 15deg max)
+            const rotateX = ((y - centerY) / centerY) * -15; 
+            const rotateY = ((x - centerX) / centerX) * 15;
+
+            card.style.transition = "none";
+            // Less z-depth needed since it's a smaller object
+            // Add a slight translation to follow mouse
+            // const transX = ((x - centerX) / centerX) * 5;
+            // const transY = ((y - centerY) / centerY) * 5;
+
+            // REMOVED scale3d(1.02) to prevent scaling blur artifacts
+            card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+            
+            // Adjust shine using CSS variables for high performance
+            const shine = card.querySelector('.card-shine');
+            if(shine) {
+                // Calculate percentage positions (0% to 100%)
+                const perX = (x / rect.width) * 100;
+                const perY = (y / rect.height) * 100;
+                
+                // Set CSS variables directly
+                shine.style.setProperty('--shine-x', `${perX}%`);
+                shine.style.setProperty('--shine-y', `${perY}%`);
+            }
+        });
+
+        card.addEventListener("mouseleave", () => {
+            card.style.transition = "transform 0.6s cubic-bezier(0.23, 1, 0.32, 1)";
+            card.style.transform = "rotateX(0) rotateY(0) scale3d(1, 1, 1)";
+            
+            // Fix blur: Remove transform after animation AND force flat rendering
+            setTimeout(() => {
+                if (!card.matches(':hover')) {
+                    card.style.transform = "none";
+                    card.style.transformStyle = "flat"; 
+                }
+            }, 600);
+        });
+        
+        card.addEventListener("mouseenter", () => {
+             card.style.transition = "none";
+             card.style.transformStyle = "preserve-3d"; // Re-enable 3D for children
+        });
+    });
