@@ -1,3 +1,103 @@
+// FAQ Switch & Akkordeon Funktionalität
+document.addEventListener('DOMContentLoaded', function() {
+    // FAQ Daten
+    const faqs = {
+        unternehmen: [
+            {q: 'Wie wird die DSGVO-Konformität sichergestellt?', a: 'Unsere Plattform erfüllt alle Anforderungen der DSGVO. Daten werden verschlüsselt gespeichert und verarbeitet. Zugriff erhalten nur autorisierte Personen.'},
+            {q: 'Wie schnell sieht man erste Ergebnisse?', a: 'Erste positive Veränderungen sind oft schon nach wenigen Wochen sichtbar, abhängig von der Nutzung und dem Engagement der Teilnehmer.'},
+            {q: 'Woher bekommen die Mitarbeiter die Wearables?', a: 'Die Wearables werden direkt von uns an die teilnehmenden Unternehmen geliefert und vor Ort verteilt.'},
+            {q: 'Gibt es eine Mindestvertragslaufzeit?', a: 'Nein, es gibt keine Mindestvertragslaufzeit. Sie können das Angebot jederzeit kündigen.'},
+            {q: 'Wie funktionieren Belohnungen?', a: 'Belohnungen werden durch das Sammeln von Health Points freigeschaltet und können für verschiedene Angebote eingelöst werden.'}
+        ],
+        partner: [
+            {q: 'Wie werde ich Partner?', a: 'Kontaktieren Sie uns über das Formular. Wir melden uns mit allen Details.'},
+            {q: 'Welche Voraussetzungen gibt es?', a: 'Sie benötigen ein passendes Angebot im Bereich Gesundheit, Fitness oder Prävention.'},
+            {q: 'Wie läuft die Abrechnung?', a: 'Die Abrechnung erfolgt monatlich, transparent und digital.'}
+        ],
+        nutzer: [
+            {q: 'Wie installiere ich die App?', a: 'Laden Sie die App im App Store oder Google Play Store herunter und registrieren Sie sich mit Ihrem Zugangscode.'},
+            {q: 'Welche Wearables werden unterstützt?', a: 'Wir unterstützen die gängigsten Wearables wie Apple Watch, Fitbit, Garmin und viele mehr.'},
+            {q: 'Wie kann ich Punkte sammeln?', a: 'Durch tägliche Aktivität, Challenges und das Erreichen von Gesundheitszielen sammeln Sie automatisch Punkte.'}
+        ]
+    };
+
+        function renderFaq(type) {
+                const container = document.getElementById('faq-content');
+                container.innerHTML = faqs[type].map(faq => `
+                    <div class="faq-item" style="background:rgba(255,255,255,0.75); border-radius:24px; box-shadow:0 8px 32px 0 rgba(31,38,135,0.10); border:1.5px solid rgba(255,255,255,0.35); margin-bottom:12px; overflow:hidden; transition:box-shadow 0.2s, border 0.2s; backdrop-filter: blur(14px);">
+                        <button class="faq-question" style="width:100%; text-align:left; background:none; border:none; outline:none; font-size:19px; font-weight:600; color:#222; padding:28px 36px; display:flex; justify-content:space-between; align-items:center; cursor:pointer; transition:background 0.18s, color 0.18s;">
+                            <span>${faq.q}</span>
+                            <span class="faq-icon" style="display:inline-block; width:28px; height:28px; position:relative; transition:transform 0.18s;">
+                                <span style="position:absolute;left:13px;top:4px;width:2px;height:20px;background:#888;border-radius:2px;display:block;transition:all 0.22s cubic-bezier(.4,1.4,.6,1);transform-origin:center center;"></span>
+                                <span style="position:absolute;left:4px;top:13px;width:20px;height:2px;background:#888;border-radius:2px;display:block;transition:all 0.22s cubic-bezier(.4,1.4,.6,1);transform-origin:center center;"></span>
+                            </span>
+                        </button>
+                        <div class="faq-answer" style="display:none; padding:0 36px 28px 36px; color:#555; font-size:17px; line-height:1.6; background:rgba(255,255,255,0.92); border-radius:0 0 24px 24px;">${faq.a}</div>
+                    </div>
+                `).join('');
+                addAccordionListeners();
+                // Card Hover Effekt
+                document.querySelectorAll('.faq-item').forEach(card => {
+                    card.addEventListener('mouseenter', () => {
+                        card.style.boxShadow = '0 12px 36px 0 rgba(31,38,135,0.16)';
+                        card.style.border = '1.5px solid #e0e7ef';
+                    });
+                    card.addEventListener('mouseleave', () => {
+                        card.style.boxShadow = '0 8px 32px 0 rgba(31,38,135,0.10)';
+                        card.style.border = '1.5px solid rgba(255,255,255,0.35)';
+                    });
+                });
+        }
+
+    function addAccordionListeners() {
+        var questions = document.querySelectorAll('.faq-question');
+        questions.forEach(function(btn) {
+            btn.addEventListener('click', function() {
+                var answer = btn.nextElementSibling;
+                var isOpen = answer.style.display === 'block';
+                document.querySelectorAll('.faq-answer').forEach(function(a) { a.style.display = 'none'; });
+                // Alle Icons zurücksetzen: Plus
+                document.querySelectorAll('.faq-icon').forEach(function(icon) {
+                    icon.children[0].style.transform = 'rotate(0deg)';
+                    icon.children[1].style.transform = 'rotate(0deg)';
+                });
+                if (!isOpen) {
+                    answer.style.display = 'block';
+                    // Icon zu X verwandeln (beide Linien sichtbar, gekreuzt)
+                    var icon = btn.querySelector('.faq-icon');
+                    if(icon) {
+                        icon.children[0].style.transform = 'rotate(45deg)';
+                        icon.children[1].style.transform = 'rotate(45deg)';
+                    }
+                }
+            });
+        });
+    }
+
+        // Switch Buttons (Liquid Glass Optik)
+        document.querySelectorAll('.faq-switch-btn').forEach(function(btn) {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.faq-switch-btn').forEach(b => {
+                    b.classList.remove('active');
+                    b.style.background = 'rgba(255,255,255,0.18)';
+                    b.style.color = '#888';
+                    b.style.boxShadow = '0 2px 12px 0 rgba(0,0,0,0.06)';
+                    b.style.border = '1.5px solid rgba(255,255,255,0.25)';
+                    b.style.backdropFilter = 'blur(8px)';
+                });
+                btn.classList.add('active');
+                btn.style.background = 'rgba(255,255,255,0.35)';
+                btn.style.color = '#222';
+                btn.style.boxShadow = '0 4px 24px 0 rgba(0,0,0,0.10),0 1.5px 0 0 rgba(255,255,255,0.25) inset';
+                btn.style.border = '1.5px solid rgba(255,255,255,0.5)';
+                btn.style.backdropFilter = 'blur(12px)';
+                renderFaq(btn.dataset.faq);
+            });
+        });
+
+    // Initial Render
+    renderFaq('unternehmen');
+});
 // Liquid Glass Navbar Effekte
 document.addEventListener('DOMContentLoaded', () => {
     console.log('main.js geladen.');
